@@ -18,7 +18,16 @@ function fetchMerge($branch) {
 function openBranchInBrowser() {
     $currentBranch = gitCurrentBranch;
     $originUrl = gitOriginUrl;
-    start chrome "$originUrl/tree/$currentBranch";
+
+    if ($originUrl -like '*.git*') {
+        $originUrl = $originUrl.Replace('.git', '');
+    }
+
+    if ($originUrl -like '*bitbucket*') {
+        start chrome "$originUrl/branch/$currentBranch";
+    } else {
+        start chrome "$originUrl/tree/$currentBranch";
+    }
 }
 
 function gitPushOrPullCurrent($pushOrPull) {
