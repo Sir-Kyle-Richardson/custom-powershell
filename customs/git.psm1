@@ -42,4 +42,20 @@ function gitStats {
     git diff --stat 4b825dc642cb6eb9a060e54bf8d69288fbee4904
 }
 
+function 24gTicket {
+    $baseJiraURL = 'https://24group.atlassian.net/browse';
+    $currentBranch = gitCurrentBranch;
+    
+    # Assumes ticket name is first after branch type (feature, bugfix, etc);
+    # i.e. feature/XZ796-338-jest
+    $parts = $currentBranch -Split "/";
+    $branchName = $parts[1];
+
+
+    $ticket = $branchName -Split "-";
+    $ticket = $ticket[0] + "-" + $ticket[1];
+
+    start chrome "$baseJiraURL/$ticket";
+}
+
 Export-ModuleMember -Variable * -Function * -Alias *

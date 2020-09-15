@@ -3,10 +3,6 @@ function profileLocation() {
     cd "C:\Windows\System32\WindowsPowerShell\v1.0"
 }
 
-function startDocker() {
-    start "C:\Program Files\Docker\Docker\Docker For Windows.exe"
-}
-
 function desktop() {
     $user = $env:UserName
     cd "C:\Users\$user\Desktop"
@@ -68,27 +64,8 @@ function babel-jest-debug($test) {
     ./node_modules/.bin/babel-node --inspect=0.0.0.0:9228 ./node_modules/jest/bin/jest.js --runInBand --forceExit $test
 }
 
-function dip-jest-debug($test) {
-    Send-AU3Key -Key "{F5}";
-    clear;
-    dip tests with-debug $test
-}
-
-function codeDebugMigration() {
-    Send-AU3Key -Key "{F5}";
-    clear;
-    node --inspect=0.0.0.0:9228 ./node_modules/knex/bin/cli.js migrate:latest
-}
-
 function remove($item) {
     Remove-Item -Force -Recurse -Path $item
-}
-
-function dip-nuke() {
-    docker stop $(docker ps -aq);
-    docker system prune -f;
-    docker rm $(docker ps -aq);
-    docker rmi $(docker images -q);
 }
 
 loadCustom("git.psm1");
@@ -112,6 +89,7 @@ Set-Alias -Name get-process-by-port -Value getProcessByPort
 Set-Alias -Name kill-process-by-id -Value killProcessById
 Set-Alias -Name homee-dump -Value homeeDump
 Set-Alias -Name fetch-merge -Value fetchMerge
+Set-Alias -Name 24g-ticket -Value 24gTicket
 
 # set location to desktop
 $currentLocation = pwd;
