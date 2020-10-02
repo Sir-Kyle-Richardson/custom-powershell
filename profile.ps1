@@ -96,3 +96,9 @@ $currentLocation = pwd;
 if ($currentLocation -match 'System32') {
     desktop;
 }
+
+$secretPath = "C:\Windows\System32\WindowsPowerShell\v1.0\secret.psm1";
+
+if (Test-Path $secretPath) {
+    Import-Module $secretPath;
+}
